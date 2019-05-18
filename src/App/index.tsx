@@ -165,7 +165,9 @@ function useAutoQueue() {
   const remainingTime = useRemainingTime(timeSlot)
 
   useEffect(() => {
-    if (remainingTime.startsWith('-')) {
+    const [h, m] = toTime(remainingTime)
+
+    if (h < 0 || m < 0) {
       const nextSlot = getNextSlot(timeSlot)
       setTimeSlot(nextSlot)
 
