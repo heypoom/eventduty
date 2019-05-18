@@ -138,18 +138,13 @@ function getRemainingTime(timeSlot: string) {
   return nextSlot.diff(currentTime).toFormat('mm:ss')
 }
 
-function useRemainingTime(timeSlot: string, setTimeSlot: Function) {
+function useRemainingTime(timeSlot: string) {
   const [remainingTime, setRemainingTime] = useState('00:00')
   let timer = 0
 
   useEffect(() => {
     timer = setInterval(() => {
       const remainingTime = getRemainingTime(timeSlot)
-
-      if (remainingTime.startsWith('-')) {
-        setTimeSlot(getNextSlot(timeSlot))
-        return
-      }
 
       setRemainingTime(remainingTime)
     }, 1000)
@@ -158,6 +153,30 @@ function useRemainingTime(timeSlot: string, setTimeSlot: Function) {
   }, [timeSlot])
 
   return remainingTime
+}
+
+function useAutoQueue() {
+  const initialSlot = getNearestSlot()
+  const [timeSlot, setTimeSlot] = useState(initialSlot)
+
+  const initialQueue = timeSlots.findIndex(t => t === initialSlot) || 1
+  const [queue, setQueue] = useState(initialQueue)
+
+  const remainingTime = useRemainingTime(timeSlot)
+
+  useEffect(() => {
+    if (remainingTime.startsWith('-')) {
+      const nextSlot = getNextSlot(timeSlot)
+      setTimeSlot(nextSlot)
+
+      const nextQueue = timeSlots.findIndex(t => t === nextSlot) || 1
+      setQueue(nextQueue)
+
+      return
+    }
+  }, [remainingTime])
+
+  return [timeSlot, queue, remainingTime]
 }
 
 const CardDecorLine = styled.div`
@@ -174,16 +193,13 @@ const CardDecorLine = styled.div`
   box-shadow: 0 1px 2px rgba(80, 250, 123, 0.2);
 `
 
+const timeSlots = getTimeSlots('2:00', '6:40')
+
 export function App() {
-  const [queue, setQueue] = useState(1)
   const [currentActivity, setActivity] = useState('เตรียมสถานที่ 🏡')
   const [upcoming, setUpcoming] = useState('ลงทะเบียน')
-
-  const initialSlot = getNearestSlot()
-  const [timeSlot, setTimeSlot] = useState(initialSlot)
   const [period, setPeriod] = useState('CHAOS PERIOD 🔥')
-
-  const remainingTime = useRemainingTime(timeSlot, setTimeSlot)
+  const [timeSlot, queue, remainingTime] = useAutoQueue()
 
   return (
     <Container>
