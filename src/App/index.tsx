@@ -68,22 +68,88 @@ const QueueNo = styled.span`
 // 5-minute time-slot interval
 const SLOT_INTERVAL = 5
 
+const toTime = (x: string) => x.split(':').map(Number)
+
+function getNearestSlot(time?: string) {
+  if (!time) {
+    const date = new Date()
+    time = date.getHours() + ':' + date.getMinutes()
+  }
+
+  const [h, m] = toTime(time)
+  const min = m - (m % SLOT_INTERVAL)
+
+  return fromTime([h, min])
+}
+
+const fromTime = (x: [number, number]) => x.map(zeroPad).join(':')
+
+function getNextSlot(timeSlot: string) {
+  const [h, m] = toTime(timeSlot)
+
+  if (m + 5 >= 60) {
+    return fromTime([h + 1, 0])
+  }
+
+  const min = m - (m % SLOT_INTERVAL)
+
+  return fromTime([h, min + 5])
+}
+
+function strptime(timeSlot: string) {
+  const [h, m] = toTime(timeSlot)
+  return DateTime.fromObject({hour: h, minute: m})
+}
+
+const MAX_SLOTS = 100
+
+const zeroPad = (x: number) => String(x < 10 ? '0' + x : x)
+
+function getTimeSlots(startsFrom: string, endsAt: string) {
+  const [startHour, startMinute] = toTime(startsFrom)
+  const [endHour, endMinute] = toTime(endsAt)
+
+  const slots = ['__']
+  let iH = startHour
+  let iM = startMinute
+
+  for (let i = 0; i <= MAX_SLOTS; i++) {
+    const timeSlot = fromTime([iH, iM])
+    slots.push(timeSlot)
+
+    iM += SLOT_INTERVAL
+
+    if (iM >= 60) {
+      iM = 0
+      iH++
+    }
+
+    if (iH >= endHour && iM >= endMinute) return slots
+  }
+
+  return slots
+}
+
 function getRemainingTime(timeSlot: string) {
-  const [h, m] = timeSlot.split(':').map(Number)
-  const slotStartingTime = DateTime.fromObject({hour: h, minute: m})
+  const slotStartingTime = strptime(timeSlot)
   const nextSlot = slotStartingTime.plus({minute: SLOT_INTERVAL})
   const currentTime = DateTime.local()
 
   return nextSlot.diff(currentTime).toFormat('mm:ss')
 }
 
-function useRemainingTime(timeSlot: string) {
+function useRemainingTime(timeSlot: string, setTimeSlot: Function) {
   const [remainingTime, setRemainingTime] = useState('00:00')
   let timer = 0
 
   useEffect(() => {
     timer = setInterval(() => {
       const remainingTime = getRemainingTime(timeSlot)
+
+      if (remainingTime.startsWith('-')) {
+        setTimeSlot(getNextSlot(timeSlot))
+        return
+      }
 
       setRemainingTime(remainingTime)
     }, 1000)
@@ -112,10 +178,12 @@ export function App() {
   const [queue, setQueue] = useState(1)
   const [currentActivity, setActivity] = useState('เตรียมสถานที่ 🏡')
   const [upcoming, setUpcoming] = useState('ลงทะเบียน')
-  const [timeSlot, setTimeSlot] = useState('02:15')
+
+  const initialSlot = getNearestSlot()
+  const [timeSlot, setTimeSlot] = useState(initialSlot)
   const [period, setPeriod] = useState('CHAOS PERIOD 🔥')
 
-  const remainingTime = useRemainingTime(timeSlot)
+  const remainingTime = useRemainingTime(timeSlot, setTimeSlot)
 
   return (
     <Container>
