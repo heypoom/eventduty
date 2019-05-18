@@ -65,8 +65,8 @@ const QueueNo = styled.span`
   font-weight: 500;
 `
 
-// 5-minute time-slot interval
-const SLOT_INTERVAL = 5
+// Create a time stop every n minute, usually 5.
+const SLOT_INTERVAL = 1
 
 const toTime = (x: string) => x.split(':').map(Number)
 
@@ -87,13 +87,13 @@ const fromTime = (x: [number, number]) => x.map(zeroPad).join(':')
 function getNextSlot(timeSlot: string) {
   const [h, m] = toTime(timeSlot)
 
-  if (m + 5 >= 60) {
+  if (m + SLOT_INTERVAL >= 60) {
     return fromTime([h + 1, 0])
   }
 
   const min = m - (m % SLOT_INTERVAL)
 
-  return fromTime([h, min + 5])
+  return fromTime([h, min + SLOT_INTERVAL])
 }
 
 function strptime(timeSlot: string) {
