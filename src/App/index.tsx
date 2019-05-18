@@ -66,7 +66,7 @@ const QueueNo = styled.span`
 `
 
 // Create a time stop every n minute, usually 5.
-const SLOT_INTERVAL = 1
+const SLOT_INTERVAL = 5
 
 const toTime = (x: string) => x.split(':').map(Number)
 
