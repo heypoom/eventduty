@@ -20,7 +20,15 @@ export function getTimeSlots(startsFrom: string, endsAt: string): string[] {
       hour++
     }
 
-    if (hour >= endHour && minute >= endMinute) return slots
+    if (hour !== endHour && hour >= 23) {
+      if (hour >= 24) hour = 0
+
+      continue
+    }
+
+    if (hour >= endHour && minute >= endMinute) {
+      return slots
+    }
   }
 
   return slots
