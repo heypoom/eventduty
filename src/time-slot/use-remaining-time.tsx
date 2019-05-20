@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react'
-import {getRemainingTime} from './get-remaining-time'
 
-import Timeout = NodeJS.Timeout
+import {getRemainingTime} from './get-remaining-time'
 
 export function useRemainingTime(timeSlot: string) {
   const [remainingTime, setRemainingTime] = useState('00:00')
