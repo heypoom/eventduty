@@ -3,12 +3,17 @@ module.exports = wallaby => ({
     'src/**/*.js',
     'src/**/*.ts',
     'src/**/*.tsx',
+    'tests/utils/*',
+    'tsconfig.json',
+    '__mocks__/**/*',
+    '@types/**/*',
   ],
 
   tests: [
     'tests/**/*.js',
     'tests/**/*.ts',
     'tests/**/*.tsx',
+    '!tests/utils/*',
   ],
 
   env: {
