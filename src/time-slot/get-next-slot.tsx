@@ -10,6 +10,7 @@ export function getNextSlot(timeSlot: string) {
   }
 
   const min = m - (m % SLOT_INTERVAL)
+  const hour = h == 24 ? 0 : h
 
-  return fromTime([h, min + SLOT_INTERVAL])
+  return fromTime([hour, min + SLOT_INTERVAL])
 }
