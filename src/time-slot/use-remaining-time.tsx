@@ -5,10 +5,10 @@ import Timeout = NodeJS.Timeout
 
 export function useRemainingTime(timeSlot: string) {
   const [remainingTime, setRemainingTime] = useState('00:00')
-  let timer: Timeout
+  let timer: number
 
   useEffect(() => {
-    timer = setInterval(() => {
+    timer = window.setInterval(() => {
       const remainingTime = getRemainingTime(timeSlot)
 
       setRemainingTime(remainingTime)

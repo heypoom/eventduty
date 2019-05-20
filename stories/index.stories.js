@@ -4,16 +4,11 @@ import {storiesOf} from '@storybook/react'
 import {action} from '@storybook/addon-actions'
 import {linkTo} from '@storybook/addon-links'
 
-import {Button, Welcome} from '@storybook/react/demo'
+import {useRemainingTime} from '../src/time-slot/use-remaining-time'
 
-storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')}/>)
+storiesOf('Get Remaining Time', module)
+  .add('basic', () => {
+    const remainingTime = useRemainingTime('12:30')
 
-storiesOf('Button', module)
-  .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
-  .add('with some emoji', () => (
-    <Button onClick={action('clicked')}>
-      <span role="img" aria-label="so cool">
-        😀 😎 👍 💯
-      </span>
-    </Button>
-  ))
+    return <div>{remainingTime}</div>
+  })
