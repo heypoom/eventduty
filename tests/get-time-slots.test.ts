@@ -9,12 +9,15 @@ describe('Get time slots', () => {
 
     expect(ts[1]).toBe('04:00')
     expect(ts[5]).toBe('04:20')
-    expect(ts[24]).toBe('05:55')
+    expect(ts[ts.length - 1]).toBe('05:55')
   })
 
   it('should work across days', () => {
-    const ts = getTimeSlots('23:00', '04:00') //?.$
+    const ts = getTimeSlots('23:00', '04:00')
 
     expect(ts.length > 20).toBeTruthy()
+    expect(ts[1]).toBe('23:00')
+    expect(ts[13]).toBe('00:00')
+    expect(ts[ts.length - 1]).toBe('03:55')
   })
 })
