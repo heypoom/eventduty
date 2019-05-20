@@ -1,8 +1,10 @@
-import {getNearestSlot} from '../time-slot/get-nearest-slot'
 import {useEffect, useState} from 'react'
-import {useRemainingTime} from '../time-slot/use-remaining-time'
+
+import {getNextSlot} from './get-next-slot'
+import {getNearestSlot} from './get-nearest-slot'
+import {useRemainingTime} from './use-remaining-time'
+
 import {toTime} from '../time-utils'
-import {getNextSlot} from '../time-slot/get-next-slot'
 
 export function useAutoQueue(timeSlots: string[]) {
   const initialSlot = getNearestSlot()
