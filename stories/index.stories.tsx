@@ -22,7 +22,9 @@ const RemainingTimeDisplay = () => {
 }
 
 storiesOf('Get Remaining Time', module)
-  .add('Countdown Clock', () => <RemainingTimeDisplay />)
+  .add('Countdown Clock', () => <RemainingTimeDisplay />, {
+    info: {inline: true},
+  })
   .add('Countdown Card', () => (
     <Card style={{margin: '3em'}}>
       <RemainingTimeDisplay />
