@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import {CurrentDutyCard} from '../current-duty-card'
+import {Card} from '../ui/Card'
 
 const Container = styled.div`
   display: grid;
@@ -18,5 +19,11 @@ const Container = styled.div`
 export const App = () => (
   <Container>
     <CurrentDutyCard />
+
+    <Card>
+      <div>50 (19:20)</div>
+
+      <div>ลงทะเบียน</div>
+    </Card>
   </Container>
 )

@@ -3,52 +3,40 @@ import React, {useState} from 'react'
 import {useAutoQueue} from '../time-slot/use-auto-queue'
 import {Card} from '../ui/Card'
 import styled from '@emotion/styled'
+import {CardDecorLine} from '../ui/CardDecorLine'
 
-const PeriodLabel = styled.div`
+export const PeriodLabel = styled.div`
   color: #555;
   font-size: 1.4em;
   margin-bottom: 0.8em;
 `
-const QueueLabel = styled.div`
+export const QueueLabel = styled.div`
   font-size: 2.5em;
   color: #745fb5;
 
   line-height: 1.8em;
 `
-const CurrentActivity = styled.div`
+export const CurrentActivity = styled.div`
   color: #444;
   font-size: 1.75em;
 `
-const RemainingTime = styled.div`
+export const RemainingTime = styled.div`
   margin-top: 1em;
   font-size: 1.5em;
 `
-const Upcoming = styled.div`
+export const Upcoming = styled.div`
   color: #555;
   margin-top: 0.8em;
   font-size: 1.38em;
 `
-const Small = styled.span`
+export const Small = styled.span`
   font-size: 0.78em;
 `
-const TimeSlot = styled.span`
+export const TimeSlot = styled.span`
   font-size: 0.7em;
 `
-const QueueNo = styled.span`
+export const QueueNo = styled.span`
   font-weight: 500;
-`
-const CardDecorLine = styled.div`
-  position: absolute;
-
-  width: 100%;
-  height: 6px;
-  left: 0;
-  top: 0;
-
-  // background: #50fa7b;
-  // background: linear-gradient(45deg, #00ffa1, aqua);
-  background: linear-gradient(45deg, #755fb4, #a3a1ff);
-  box-shadow: 0 1px 2px rgba(80, 250, 123, 0.2);
 `
 
 export function CurrentDutyCard() {
