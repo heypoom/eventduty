@@ -1,72 +1,73 @@
 {
-  "name": "EventDuty",
-  "description": "MC/OD Duty Manager for Events and Camps!",
+  "name": "rust-wasm-lab",
+  "description": "Rust WebAssembly Lab",
   "version": "1.0.0",
   "main": "index.js",
+  "repository": "git@github.com:phoomparin/ywc17-homework.git",
+  "author": "Phoomparin Mano <phoomparin@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "parcel src/index.pug",
+    "build": "parcel build --public-url '.' src/index.pug"
+  },
   "dependencies": {
-    "@emotion/core": "^10.0.10",
-    "@emotion/styled": "^10.0.11",
-    "@types/node": "^12.0.2",
-    "luxon": "^1.13.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "@emotion/core": "^10.0.22",
+    "@emotion/styled": "^10.0.23",
+    "@reach/router": "^1.2.1",
+    "classnames": "^2.2.6",
+    "firebase": "^7",
+    "hammer-touchemulator": "^0.0.2",
+    "moment": "^2.24.0",
+    "noty": "^3.2.0-beta",
+    "rc-gesture": "^0.0.22",
+    "react": "^16.12.0",
+    "react-animations": "^1.0.0",
+    "react-dom": "^16.12.0",
+    "react-ink": "^6.4.0",
+    "react-reveal": "^1.2.2",
+    "react-spring": "^8.0.27",
+    "react-swipeable": "^5.4.0",
+    "react-transition-group": "^4.3.0",
+    "react-use-gesture": "^6.0.14",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@storybook/addon-actions": "^5.0.11",
-    "@storybook/addon-info": "^5.0.11",
-    "@storybook/addon-links": "^5.0.11",
-    "@storybook/addons": "^5.0.11",
-    "@storybook/react": "^5.0.11",
-    "@types/jest": "^24.0.13",
-    "@types/luxon": "^1.13.0",
-    "@types/mockdate": "^2.0.0",
-    "@types/react": "^16.8.17",
-    "@types/react-dom": "^16.8.4",
-    "@types/storybook__react": "^4.0.1",
-    "awesome-typescript-loader": "^5.2.1",
-    "babel-loader": "^8.0.6",
-    "jest": "^24.8.0",
-    "mockdate": "^2.0.2",
-    "parcel-bundler": "^1.12.3",
-    "prettier": "^1.17.0",
-    "react-docgen-typescript-loader": "^3.1.0",
-    "react-testing-library": "^7.0.1",
-    "sass": "^1.20.1",
-    "ts-jest": "^24.0.2",
-    "ts-loader": "^6.0.0",
-    "typescript": "^3.4.5"
+    "@types/classnames": "^2.2.9",
+    "@types/jest": "^24.0.23",
+    "@types/react": "^16.9.12",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-transition-group": "^4.2.3",
+    "@typescript-eslint/eslint-plugin": "^2.8.0",
+    "@typescript-eslint/parser": "^2.8.0",
+    "eslint": "^6.7.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^3.0.9",
+    "jest": "^24.9.0",
+    "jstransformer-markdown-it": "^2.1.0",
+    "lint-staged": ">=8",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-markdown-string": "^1.4.2",
+    "parcel-plugin-static-files-copy": "^2.2.1",
+    "parcel-plugin-wasm.rs": "^1.2.15",
+    "prettier": "^1.18.2",
+    "pug": "^2.0.4",
+    "sass": "^1.23.1",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.6.4",
+    "wasm-pack": "^0.0.0"
   },
-  "scripts": {
-    "start": "parcel src/index.html",
-    "build": "parcel build src/index.html",
-    "test": "jest",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
-  "jest": {
-    "roots": [
-      "<rootDir>"
-    ],
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testMatch": [
-      "**/tests/**/*.[jt]s?(x)",
-      "**/?(*.)+(spec|test).[jt]s?(x)"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/tests/utils/"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
+  "lint-staged": {
+    "*.{js,ts}": [
+      "prettier --write",
+      "git add"
     ]
   }
 }

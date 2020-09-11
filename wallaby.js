@@ -9,12 +9,7 @@ module.exports = wallaby => ({
     '@types/**/*',
   ],
 
-  tests: [
-    'tests/**/*.js',
-    'tests/**/*.ts',
-    'tests/**/*.tsx',
-    '!tests/utils/*',
-  ],
+  tests: ['tests/**/*.js', 'tests/**/*.ts', 'tests/**/*.tsx', '!tests/utils/*'],
 
   env: {
     type: 'node',

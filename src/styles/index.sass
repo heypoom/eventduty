@@ -1,0 +1,104 @@
+@use 'variables' as *
+@use 'fonts'
+
+@use 'swipeout'
+@use 'noty'
+
+@keyframes fade-in
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+.fade.in
+  animation-name: fade-in
+  animation-duration: 1.2s
+  animation-iteration-count: 1
+  animation-timing-function: ease-in-out
+  
+body
+  margin: 0
+  font-weight: 500
+  min-height: 100vh
+  color: #333
+  font-size: 18.5px
+  overflow-x: hidden
+
+  @include fonts.default
+
+  @media screen and (max-width: 410px)
+    font-size: 16px
+
+  @media screen and (max-width: 370px)
+    font-size: 15px
+
+*
+  box-sizing: border-box
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0.18)
+
+h1, h2, h3, h4, h5, h6
+  @include fonts.heading
+  margin: 1em 0
+
+h3
+  font-size: 1.4em
+
+p
+  @include fonts.legible
+  line-height: 34px
+
+a
+  color: $accent
+  text-decoration: none
+
+table
+  thead th
+    text-align: left
+    border-bottom: 1px solid #d6d6d6
+
+  td, th
+    padding: 6px 8px 10px 8px
+    border-bottom: 1px solid #d6d6d6
+
+  td:not(:last-child), th:not(:last-child)
+    border-right: 1px solid #d6d6d6
+
+.table-container
+  overflow-y: scroll
+
+.duty-card-container,
+.transition-card-row
+  opacity: 0
+  transition: all 0.8s ease-in-out
+  transform: translate3d(-130%, 0, 0)
+  will-change: transform, opacity
+
+  &.transition-card-enter-active, &.transition-card-enter-done
+    opacity: 1
+    transform: translate3d(0, 0, 0)
+
+  &.transition-card-exit
+    transform: translate3d(0, 0, 0)
+
+  &.transition-card-exit-active
+    opacity: 0
+    transform: translate3d(100%, 0, 0)
+    visibility: hidden
+
+.duty-list .separator-container
+  opacity: 0
+  transition: all 0.8s ease-in-out
+  transform: translate3d(-130%, 0, 0)
+  will-change: transform, opacity
+
+  &.separator-enter-active, &.separator-enter-done
+    opacity: 1
+    transform: translate3d(0, 0, 0)
+
+  &.separator-exit
+    transform: translate3d(0, 0, 0)
+
+  &.separator-exit-active
+    opacity: 0
+    transform: translate3d(-130%, 0, 0)
+    visibility: hidden

@@ -1,0 +1,74 @@
+.swipeout
+  overflow: hidden
+  position: relative
+  touch-action: none
+
+.swipeout-content
+  position: relative
+  width: 100%
+  will-change: left, transform
+
+.swipeout-cover
+  position: absolute
+  z-index: 2
+  background: transparent
+  height: 100%
+  width: 100%
+  top: 0
+  display: none
+  will-change: left, transform
+
+.swipeout-actions 
+  position: absolute
+  top: 0
+  bottom: 0
+
+  display: flex
+  overflow: hidden
+  white-space: nowrap
+
+.swipeout-actions-left 
+  left: 0
+
+.swipeout-actions-right 
+  right: 0
+
+.swipeout-btn 
+  display: flex
+  align-items: center
+  justify-content: center
+  position: relative
+  overflow: hidden
+
+.duty-card-container
+  user-select: none
+
+  .swipeout
+    border-radius: 0px 6px 6px 0px
+
+  .swipeout-btn-text
+    padding: 0
+    height: 100%
+    min-width: 55px
+
+  .swipeout-btn.duty-card-action
+    color: white
+    font-size: 0.85em
+
+    .swipeout-actions-left &
+      border-radius: 6px 0px 0px 6px
+
+    .swipeout-actions-right &
+      border-radius: 0px 6px 6px 0px
+
+  .duty-card-action-container
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 100%
+
+    position: relative
+
+    &.action-left
+      justify-content: flex-start
+      padding-left: 12px
