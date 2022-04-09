@@ -17,7 +17,7 @@
     "classnames": "^2.2.6",
     "firebase": "^7",
     "hammer-touchemulator": "^0.0.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "noty": "^3.2.0-beta",
     "rc-gesture": "^0.0.22",
     "react": "^16.12.0",
